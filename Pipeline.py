@@ -129,7 +129,8 @@ def visualizeGraph(val_matrix, graph, columnNames, filename, title="", show = Fa
         plt.close()
 
 def plotMatrix(val_matrix, columnNames, filename, show=False, save=True):
-    val_matrix = absmaxND(val_matrix, axis=2)
+    if len(val_matrix.shape) == 3:
+        val_matrix = absmaxND(val_matrix, axis=2)
     print(val_matrix)
     f1 = plt.figure(layout="constrained")
     f1.set_size_inches(6,5)
