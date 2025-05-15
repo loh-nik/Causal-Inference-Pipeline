@@ -62,7 +62,7 @@ def saveROCCurve(TPR, FPR, values, title, filename, colors = [], rowLabels = [],
     else:
         plt.close()
 
-def saveF1Curve(scores, values, title, filename, errors = [], colors = [], rowLabels=[], show = False, save= True, 
+def saveMCCCurve(scores, values, title, filename, errors = [], colors = [], rowLabels=[], show = False, save= True, 
                 xscale = "linear", yscale = "linear", figsize=(4.5,4), dpi=200, xlabel ="", ylabel ="", yAxisCut = False, yAxisLinearLim = 1):
     fig = plt.figure(figsize=figsize, layout ='constrained')
     if scores.shape[0] != len(values) and scores.shape[1] != len(values):

@@ -172,13 +172,13 @@ def gridInteractionsUnidir(show=False, save = True, calculate = True):
     else:
         stacked = np.load("unidirectional_Slowness_GridAggregates.npy")
     stackedAvg, stackedStd = getMeanStdDev(stacked, axis=2)
-    vis.saveF1Curve(stackedAvg[:,:,0], slownesses, "LKIF - Causal Effects between " + globalVarTerm + "\nand Grid for Unidirectional Effects", folder + "Unidir_Coupling_Slowness_LKIF", 
+    vis.saveMCCCurve(stackedAvg[:,:,0], slownesses, "LKIF - Causal Effects between " + globalVarTerm + "\nand Grid for Unidirectional Effects", folder + "Unidir_Coupling_Slowness_LKIF", 
                     stackedStd[:,:,0], rowLabels = ["" + globalVarTerm + " to Grid", "Grid to " + globalVarTerm + "", "" + globalVarTerm + " to Grid FP", "Grid to " + globalVarTerm + " FP"],
                     show = show, save = save, figsize = (4.5,4),dpi=300, xlabel ="Diffusion Factor", ylabel = "Causal Effect Strength")
-    vis.saveF1Curve(stackedAvg[:,:,1], slownesses, "PCMCI - Causal Effects between " + globalVarTerm + "\nand Grid for Unidirectional Effects", folder + "Unidir_Coupling_Slowness_PCMCI", 
+    vis.saveMCCCurve(stackedAvg[:,:,1], slownesses, "PCMCI - Causal Effects between " + globalVarTerm + "\nand Grid for Unidirectional Effects", folder + "Unidir_Coupling_Slowness_PCMCI", 
                     stackedStd[:,:,1], rowLabels = ["" + globalVarTerm + " to Grid", "Grid to " + globalVarTerm + "", "" + globalVarTerm + " to Grid FP", "Grid to " + globalVarTerm + " FP"],
                     show = show, save = save, figsize = (4.5,4),dpi=300, xlabel ="Diffusion Factor", ylabel = "Causal Effect Strength")
-    vis.saveF1Curve(stackedAvg[:,:,2], slownesses, "GCSS - Causal Effects between " + globalVarTerm + "\nand Grid for Unidirectional Effects", folder + "Unidir_Coupling_Slowness_GCSS", 
+    vis.saveMCCCurve(stackedAvg[:,:,2], slownesses, "GCSS - Causal Effects between " + globalVarTerm + "\nand Grid for Unidirectional Effects", folder + "Unidir_Coupling_Slowness_GCSS", 
                     stackedStd[:,:,2], rowLabels = ["" + globalVarTerm + " to Grid", "Grid to " + globalVarTerm + "", "" + globalVarTerm + " to Grid FP", "Grid to " + globalVarTerm + " FP"],
                     show = show, save = save, figsize = (4.5,4),dpi=300, xlabel ="Diffusion Factor", ylabel = "Causal Effect Strength")
 
@@ -274,13 +274,13 @@ def gridInteractionsBidir(show=False, save = True, calculate = True):
     else:
         stacked = np.load("bidirectional_GridAggregates.npy")
     stackedAvg, stackedStd = getMeanStdDev(stacked, axis=2)
-    vis.saveF1Curve(stackedAvg[:,:,0], fracGridDriv, "LKIF - Causal Effects between " + globalVarTerm + " \nand Grid for Bidirectional Effects", folder + "Bidir_Coupling_LKIF", 
+    vis.saveMCCCurve(stackedAvg[:,:,0], fracGridDriv, "LKIF - Causal Effects between " + globalVarTerm + " \nand Grid for Bidirectional Effects", folder + "Bidir_Coupling_LKIF", 
                     stackedStd[:,:,0], rowLabels = ["" + globalVarTerm + " to Grid", "Grid to " + globalVarTerm + "", "" + globalVarTerm + " to Grid FP", "Grid to " + globalVarTerm + " FP"],
                     show = show, save = save, figsize = (4.5,4.5),dpi=300, xlabel ="Coupling Strength of Grid -> " + globalVarTerm + "\ndiv. by " + globalVarTerm + " -> Grid", ylabel = "Causal Effect Strength", xscale = "log")
-    vis.saveF1Curve(stackedAvg[:,:,1], fracGridDriv, "PCMCI - Causal Effects between " + globalVarTerm + " \nand Grid for Bidirectional Effects", folder + "Bidir_Coupling_PCMCI", 
+    vis.saveMCCCurve(stackedAvg[:,:,1], fracGridDriv, "PCMCI - Causal Effects between " + globalVarTerm + " \nand Grid for Bidirectional Effects", folder + "Bidir_Coupling_PCMCI", 
                     stackedStd[:,:,1], rowLabels = ["" + globalVarTerm + " to Grid", "Grid to " + globalVarTerm + "", "" + globalVarTerm + " to Grid FP", "Grid to " + globalVarTerm + " FP"],
                     show = show, save = save, figsize = (4.5,4.5),dpi=300, xlabel ="Coupling Strength of Grid -> " + globalVarTerm + "\ndiv. by " + globalVarTerm + " -> Grid", ylabel = "Causal Effect Strength", xscale = "log")
-    vis.saveF1Curve(stackedAvg[:,:,2], fracGridDriv, "GCSS - Causal Effects between " + globalVarTerm + " \nand Grid for Bidirectional Effects", folder + "Bidir_Coupling_GCSS", 
+    vis.saveMCCCurve(stackedAvg[:,:,2], fracGridDriv, "GCSS - Causal Effects between " + globalVarTerm + " \nand Grid for Bidirectional Effects", folder + "Bidir_Coupling_GCSS", 
                     stackedStd[:,:,2], rowLabels = ["" + globalVarTerm + " to Grid", "Grid to " + globalVarTerm + "", "" + globalVarTerm + " to Grid FP", "Grid to " + globalVarTerm + " FP"],
                     show = show, save = save, figsize = (4.5,4.5),dpi=300, xlabel ="Coupling Strength of Grid -> " + globalVarTerm + "\ndiv. by " + globalVarTerm + " -> Grid", ylabel = "Causal Effect Strength", xscale = "log", yAxisCut=True, yAxisLinearLim=0.5)
 

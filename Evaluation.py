@@ -411,20 +411,9 @@ def mainEvaluations(analysisIndex = None):
                                         [0,0,0,1,0,0,0,0,0,0,0,0]])
     matrixFolder = "./MatrixGraphs/"
     saveCouplingMatrices = True
-    checkCouplingMatrices1 = False
-    checkCouplingMatrices2 = False
+    checkCouplingMatrices = False
     showCouplingMatrices = False
-    if checkCouplingMatrices1:
-        vis.saveCouplingMatrixGraph(defaultCouplingMatrixVAR, "3 Vars, Medium Density", matrixFolder+"SmallMedDense", showCouplingMatrices, saveCouplingMatrices, dpi=200)
-        vis.saveCouplingMatrixGraph(defaultCouplingMatrixVAR_HighDense, "3 Vars, High Density", matrixFolder+"SmallHighDense", showCouplingMatrices, saveCouplingMatrices, dpi=200)
-        vis.saveCouplingMatrixGraph(defaultCouplingMatrixVAR_LowDense, "3 Vars, Low Density", matrixFolder+"SmallLowDense", showCouplingMatrices, saveCouplingMatrices, dpi=200)
-        vis.saveCouplingMatrixGraph(mediumCouplingMatrixVAR, "6 Vars, Medium Density", matrixFolder+"MedMedDense", showCouplingMatrices, saveCouplingMatrices, dpi=200)
-        vis.saveCouplingMatrixGraph(mediumCouplingMatrixVAR_HighDense, "6 Vars, High Density", matrixFolder+"MedHighDense", showCouplingMatrices, saveCouplingMatrices, dpi=200)
-        vis.saveCouplingMatrixGraph(mediumCouplingMatrixVAR_LowDense, "6 Vars, Low Density", matrixFolder+"MedLowDense", showCouplingMatrices, saveCouplingMatrices, dpi=200)
-        vis.saveCouplingMatrixGraph(largeCouplingMatrixVAR, "12 Vars, Medium Density", matrixFolder+"LargeMedDense", showCouplingMatrices, saveCouplingMatrices, dpi=200)
-        vis.saveCouplingMatrixGraph(largeCouplingMatrixVAR_HighDense, "12 Vars, High Density", matrixFolder+"LargeHighDense", showCouplingMatrices, saveCouplingMatrices, dpi=200)
-        vis.saveCouplingMatrixGraph(largeCouplingMatrixVAR_LowDense, "12 Vars, Low Density", matrixFolder+"LargeLowDense", showCouplingMatrices, saveCouplingMatrices, dpi=200)
-    if checkCouplingMatrices2:
+    if checkCouplingMatrices:
         vis.saveCouplingMatrixGraph(defaultCouplingMatrixVAR, "", matrixFolder+"SmallMedDense", showCouplingMatrices, saveCouplingMatrices, dpi=200)
         vis.saveCouplingMatrixGraph(defaultCouplingMatrixVAR_HighDense, "", matrixFolder+"SmallHighDense", showCouplingMatrices, saveCouplingMatrices, dpi=200)
         vis.saveCouplingMatrixGraph(defaultCouplingMatrixVAR_LowDense, "", matrixFolder+"SmallLowDense", showCouplingMatrices, saveCouplingMatrices, dpi=200)
@@ -434,12 +423,9 @@ def mainEvaluations(analysisIndex = None):
         vis.saveCouplingMatrixGraph(largeCouplingMatrixVAR, "", matrixFolder+"LargeMedDense", showCouplingMatrices, saveCouplingMatrices, dpi=200)
         vis.saveCouplingMatrixGraph(largeCouplingMatrixVAR_HighDense, "", matrixFolder+"LargeHighDense", showCouplingMatrices, saveCouplingMatrices, dpi=200)
         vis.saveCouplingMatrixGraph(largeCouplingMatrixVAR_LowDense, "", matrixFolder+"LargeLowDense", showCouplingMatrices, saveCouplingMatrices, dpi=200)
-    #exit()
 
-    # about 20 minutes? Felt more like 40, maybe windows scheduler messed this up?
     runsPerConfigAlpha = 10
     runsPerConfigTauMax = 20
-    # about 2 minutes
     runsPerConfigSeparateParams = 20
     runsPerConfigCombinedParams = 10
     runsPerConfigAlphaCombination = 10
@@ -449,7 +435,8 @@ def mainEvaluations(analysisIndex = None):
     # to test that data shapes are correctly transmitted everywhere
     fakeRun = False
 
-    plotAlpha = (True and analysisIndex == None) or analysisIndex == 0 or analysisIndex == 1
+    # the first boolean indicates default behavior when no arguments is passed for analysisIndex
+    plotAlpha = (False and analysisIndex == None) or analysisIndex == 0 or analysisIndex == 1
     calculateAlpha = (False and analysisIndex == None) or analysisIndex == 0 or analysisIndex == 1
     alphaSizeFileName = "alphaSizeAnalysis.npy"
     alphaDensityFileName = "alphaDensityAnalysis.npy"
@@ -458,7 +445,7 @@ def mainEvaluations(analysisIndex = None):
     calculateTauMax = (False and analysisIndex == None) or analysisIndex == 0 or analysisIndex == 2
     tauMaxFileName = "tauMaxAnalysis.npy"
 
-    plotSeparateDataParameters = (True and analysisIndex == None) or analysisIndex == 0 or analysisIndex == 3
+    plotSeparateDataParameters = (False and analysisIndex == None) or analysisIndex == 0 or analysisIndex == 3
     calculateSeparateDataParameters = (False and analysisIndex == None) or analysisIndex == 0 or analysisIndex == 3
     dataParamsFileName = "dataParameters.npz"
 
@@ -466,11 +453,11 @@ def mainEvaluations(analysisIndex = None):
     calculateFullSearchSpace = (False and analysisIndex == None) or analysisIndex == 0 or analysisIndex == 4
     fullSearchFileName = "fullSearchSpace.npy"
 
-    plotAlphaCombined = (True and analysisIndex == None) or analysisIndex == 0 or analysisIndex == 5
+    plotAlphaCombined = (False and analysisIndex == None) or analysisIndex == 0 or analysisIndex == 5
     calculateAlphaCombined = (False and analysisIndex == None) or analysisIndex == 0 or analysisIndex == 5
     alphaCombinedFileName = "alphaCombination.npy"
 
-    plotBonusAlpha = (True and analysisIndex == None) or analysisIndex == 0 or analysisIndex == 6
+    plotBonusAlpha = (False and analysisIndex == None) or analysisIndex == 0 or analysisIndex == 6
     calculateBonusAlpha = (False and analysisIndex == None) or analysisIndex == 0 or analysisIndex == 6
     calculateBonusAlpha2 = (False and analysisIndex == None) or analysisIndex == 0 or analysisIndex == 6
 
@@ -482,7 +469,7 @@ def mainEvaluations(analysisIndex = None):
     couplingStrVAR_separate = np.array([0.01, 0.02, 0.05, 0.07,0.1,0.15,0.2,0.25,0.3])
     couplingStrCascade_separate = 10*couplingStrVAR_separate
     noiseScales_separate = [0.01,0.02,0.05,0.1,0.2,0.5]
-    # WHENEVER these are changed, make sure to change the plotting logic too!
+
     matrices_separate_VAR = [defaultCouplingMatrixVAR_LowDense, defaultCouplingMatrixVAR, defaultCouplingMatrixVAR_HighDense, 
                             mediumCouplingMatrixVAR_LowDense, mediumCouplingMatrixVAR, mediumCouplingMatrixVAR_HighDense, 
                             largeCouplingMatrixVAR_LowDense, largeCouplingMatrixVAR, largeCouplingMatrixVAR_HighDense]
@@ -493,27 +480,12 @@ def mainEvaluations(analysisIndex = None):
     alphas_combined = [0.001, 0.01, 0.05, 0.1, 0.2, 0.5]
     samples_combined = [100, 500, 1000, 10000]
     couplingStrVAR_combined = np.array([0.01, 0.05, 0.1, 0.3])
-    #couplingStrVAR_combined = np.array([0.1])
     couplingStrCascade_combined = 10*couplingStrVAR_combined
     noiseScales_combined = [0.01,0.05, 0.1, 0.5]
-    #noiseScales_combined = [0.1]
     matrices_combined_VAR = [defaultCouplingMatrixVAR_LowDense, defaultCouplingMatrixVAR, defaultCouplingMatrixVAR_HighDense, 
                             mediumCouplingMatrixVAR_LowDense, mediumCouplingMatrixVAR, mediumCouplingMatrixVAR_HighDense]
     matrices_combined_Cascade = [defaultCouplingMatrixCascade_LowDense, defaultCouplingMatrixCascade, defaultCouplingMatrixCascade_HighDense,
                                  mediumCouplingMatrixCascade_LowDense, mediumCouplingMatrixCascade, mediumCouplingMatrixCascade_HighDense]
-
-    # Alpha: 2 (VAR/Cascade) * 5 (number of matrices) * len(alphas) * runsPerConfig
-    # TauMax: 2 (VAR/Cascade) * len(tauMaxs) * runsPerConfig
-    # separate Parameters: 2 (VAR/Cascade) * runsPerConfig * (samples + couplingStr + noiseScales + matrices)
-    # combined Parameters: 2(VAR/Cascade) * runsPerConfig * samples * couplingStr * noiseScales * matrices
-    executionEstimation = (runsPerConfigAlpha * (10 * len(alphas) if calculateAlpha else 0) 
-                                           + (runsPerConfigTauMax * 2 * len(tauMaxs) if calculateTauMax else 0)
-                                           + (runsPerConfigSeparateParams * 2 * (len(samples_separate)+ len(couplingStrVAR_separate)+len(noiseScales_separate)+len(matrices_separate_VAR)) if calculateSeparateDataParameters else 0)
-                                           + (runsPerConfigCombinedParams * 2 * len(samples_combined) * len(couplingStrVAR_combined) * len(noiseScales_combined) * len(matrices_combined_VAR) if calculateFullSearchSpace else 0))
-    print("total runs, roughly equal to number of seconds: ")
-    print(executionEstimation)
-    print("Minutes estimate: ")
-    print(executionEstimation/60)
 
     if plotAlpha:
         if calculateAlpha:
@@ -649,7 +621,7 @@ def mainEvaluations(analysisIndex = None):
         vis.saveROCCurve(resultsTauMax[:,0,0,:], resultsTauMax[:,1,0,:], tauMaxs, "GCSS ROC Curve for tauMax values", folder+"GCSS_tauMax_ConstSeed_VAR_Cascade", rowLabels=["VAR", "Cascade"], show=showDiagrams, save=doSave)
         vis.saveROCCurve(resultsTauMax[:,0,1,:], resultsTauMax[:,1,1,:], tauMaxs, "PCMCI ROC Curve for tauMax values", folder+"PCMCI_tauMax_ConstSeed_VAR_Cascade", rowLabels=["VAR", "Cascade"], show=showDiagrams, save=doSave)
         
-    # uses F1 score from here, so matrices are shaped differently!
+    # uses MCC from here, so matrices are shaped differently!
     if plotSeparateDataParameters:
         if calculateSeparateDataParameters:
             seed, [matricesResults_VAR, sampleResults_VAR, _, couplingStrengthResults_VAR, noiseScaleResults_VAR, _] = runAccuracyEvaluation(algorithms=["GCSS", "LKIF", "PCMCI"], model= "VAR", evaluateSeparately=True, 
@@ -686,35 +658,35 @@ def mainEvaluations(analysisIndex = None):
         noiseScaleResults, noiseScaleError = getMeanStdDev(noiseScaleResults, axis = 2)
 
         #plot samples
-        vis.saveF1Curve(sampleResults[0,:,:], samples_separate, "MCC by sample size - VAR systems", folder + "Samples_VAR", errors=sampleError[0,:,:], rowLabels = ["GCSS", "LKIF", "PCMCI"], show=showDiagrams, save = doSave, xscale = "log", xlabel="Samples", ylabel="MCC")
-        vis.saveF1Curve(sampleResults[1,:,:], samples_separate, "MCC by sample size - x³ systems", folder + "Samples_Cascade", errors=sampleError[1,:,:], rowLabels = ["GCSS", "LKIF", "PCMCI"], show=showDiagrams, save = doSave, xscale = "log", xlabel="Samples", ylabel="MCC")
+        vis.saveMCCCurve(sampleResults[0,:,:], samples_separate, "MCC by sample size - VAR systems", folder + "Samples_VAR", errors=sampleError[0,:,:], rowLabels = ["GCSS", "LKIF", "PCMCI"], show=showDiagrams, save = doSave, xscale = "log", xlabel="Samples", ylabel="MCC")
+        vis.saveMCCCurve(sampleResults[1,:,:], samples_separate, "MCC by sample size - x³ systems", folder + "Samples_Cascade", errors=sampleError[1,:,:], rowLabels = ["GCSS", "LKIF", "PCMCI"], show=showDiagrams, save = doSave, xscale = "log", xlabel="Samples", ylabel="MCC")
 
         #plot couplingStrengths
-        vis.saveF1Curve(couplingStrengthResults[0,:,:], couplingStrVAR_separate, "MCC by coupling strength - VAR systems", folder + "CouplingStrength_VAR",errors=couplingStrengthError[0,:,:], rowLabels = ["GCSS", "LKIF", "PCMCI"], show=showDiagrams, save = doSave, xlabel="Coupling Strength", ylabel="MCC")
-        vis.saveF1Curve(couplingStrengthResults[1,:,:], couplingStrCascade_separate, "MCC by coupling strength - x³ systems", folder + "CouplingStrength_Cascade", errors=couplingStrengthError[1,:,:], rowLabels = ["GCSS", "LKIF", "PCMCI"], show=showDiagrams, save = doSave, xlabel="Coupling Strength", ylabel="MCC")
+        vis.saveMCCCurve(couplingStrengthResults[0,:,:], couplingStrVAR_separate, "MCC by coupling strength - VAR systems", folder + "CouplingStrength_VAR",errors=couplingStrengthError[0,:,:], rowLabels = ["GCSS", "LKIF", "PCMCI"], show=showDiagrams, save = doSave, xlabel="Coupling Strength", ylabel="MCC")
+        vis.saveMCCCurve(couplingStrengthResults[1,:,:], couplingStrCascade_separate, "MCC by coupling strength - x³ systems", folder + "CouplingStrength_Cascade", errors=couplingStrengthError[1,:,:], rowLabels = ["GCSS", "LKIF", "PCMCI"], show=showDiagrams, save = doSave, xlabel="Coupling Strength", ylabel="MCC")
 
-        vis.saveF1Curve(sampleResults[0,:,:], samples_separate, "MCC by sample size - VAR systems", folder + "Poster_Samples_VAR", xlabel="Number of Samples", ylabel="MCC", figsize=(4.5,3.3), dpi=300, errors=sampleError[0,:,:], rowLabels = ["GCSS", "LKIF", "PCMCI"], show=showDiagrams, save = doSave, xscale = "log")
-        vis.saveF1Curve(sampleResults[1,:,:], samples_separate, "MCC by sample size - x³ systems", folder + "Poster_Samples_Cascade", xlabel="Number of Samples", ylabel="MCC", figsize=(4.5,3.3), dpi=300, errors=sampleError[1,:,:], rowLabels = ["GCSS", "LKIF", "PCMCI"], show=showDiagrams, save = doSave, xscale = "log")
+        vis.saveMCCCurve(sampleResults[0,:,:], samples_separate, "MCC by sample size - VAR systems", folder + "Poster_Samples_VAR", xlabel="Number of Samples", ylabel="MCC", figsize=(4.5,3.3), dpi=300, errors=sampleError[0,:,:], rowLabels = ["GCSS", "LKIF", "PCMCI"], show=showDiagrams, save = doSave, xscale = "log")
+        vis.saveMCCCurve(sampleResults[1,:,:], samples_separate, "MCC by sample size - x³ systems", folder + "Poster_Samples_Cascade", xlabel="Number of Samples", ylabel="MCC", figsize=(4.5,3.3), dpi=300, errors=sampleError[1,:,:], rowLabels = ["GCSS", "LKIF", "PCMCI"], show=showDiagrams, save = doSave, xscale = "log")
 
         #plot couplingStrengths
-        vis.saveF1Curve(couplingStrengthResults[0,:,:], couplingStrVAR_separate, "MCC by coupling strength - VAR systems", folder + "Poster_CouplingStrength_VAR",xlabel="Coupling Strength",ylabel="MCC",figsize=(4.5,3.3), dpi=300, errors=couplingStrengthError[0,:,:], rowLabels = ["GCSS", "LKIF", "PCMCI"], show=showDiagrams, save = doSave)
-        vis.saveF1Curve(couplingStrengthResults[1,:,:], couplingStrCascade_separate, "MCC by coupling strength - x³ systems", folder + "Poster_CouplingStrength_Cascade", xlabel="Coupling Strength",ylabel="MCC",figsize=(4.5,3.3), dpi=300, errors=couplingStrengthError[1,:,:], rowLabels = ["GCSS", "LKIF", "PCMCI"], show=showDiagrams, save = doSave)
+        vis.saveMCCCurve(couplingStrengthResults[0,:,:], couplingStrVAR_separate, "MCC by coupling strength - VAR systems", folder + "Poster_CouplingStrength_VAR",xlabel="Coupling Strength",ylabel="MCC",figsize=(4.5,3.3), dpi=300, errors=couplingStrengthError[0,:,:], rowLabels = ["GCSS", "LKIF", "PCMCI"], show=showDiagrams, save = doSave)
+        vis.saveMCCCurve(couplingStrengthResults[1,:,:], couplingStrCascade_separate, "MCC by coupling strength - x³ systems", folder + "Poster_CouplingStrength_Cascade", xlabel="Coupling Strength",ylabel="MCC",figsize=(4.5,3.3), dpi=300, errors=couplingStrengthError[1,:,:], rowLabels = ["GCSS", "LKIF", "PCMCI"], show=showDiagrams, save = doSave)
 
 
         #plot noiseScale
-        vis.saveF1Curve(noiseScaleResults[0,:,:], noiseScales_separate, "MCC by noise scale - VAR systems", folder + "Noise_VAR",errors=noiseScaleError[0,:,:], rowLabels = ["GCSS", "LKIF", "PCMCI"], show=showDiagrams, save = doSave, xlabel="Noise Scale", ylabel="MCC")
-        vis.saveF1Curve(noiseScaleResults[1,:,:], noiseScales_separate, "MCC by noise scale - x³ systems", folder + "Noise_Cascade", errors=noiseScaleError[1,:,:], rowLabels = ["GCSS", "LKIF", "PCMCI"], show=showDiagrams, save = doSave, xlabel="Noise Scale", ylabel="MCC")
+        vis.saveMCCCurve(noiseScaleResults[0,:,:], noiseScales_separate, "MCC by noise scale - VAR systems", folder + "Noise_VAR",errors=noiseScaleError[0,:,:], rowLabels = ["GCSS", "LKIF", "PCMCI"], show=showDiagrams, save = doSave, xlabel="Noise Scale", ylabel="MCC")
+        vis.saveMCCCurve(noiseScaleResults[1,:,:], noiseScales_separate, "MCC by noise scale - x³ systems", folder + "Noise_Cascade", errors=noiseScaleError[1,:,:], rowLabels = ["GCSS", "LKIF", "PCMCI"], show=showDiagrams, save = doSave, xlabel="Noise Scale", ylabel="MCC")
 
         #plot matrices
         matricesResults = np.reshape(matricesResults, (2,3,3,3), order="C")
         matricesError = np.reshape(matricesError, (2,3,3,3), order="C")
-        vis.saveF1Curve(matricesResults[0,0,:,:], [3,6,12], "GCSS - MCC by number of variables \n VAR systems", folder + "GCSS_Matrices_VAR", errors=matricesError[0,0,:,:], rowLabels = ["Low Density", "Medium Density", "High Density"], show=showDiagrams, save = doSave, xlabel ="Number of variables", ylabel="MCC")
-        vis.saveF1Curve(matricesResults[0,1,:,:], [3,6,12], "LKIF - MCC by number of variables \n VAR systems", folder + "LKIF_Matrices_VAR", errors=matricesError[0,1,:,:], rowLabels = ["Low Density", "Medium Density", "High Density"], show=showDiagrams, save = doSave, xlabel ="Number of variables", ylabel="MCC")
-        vis.saveF1Curve(matricesResults[0,2,:,:], [3,6,12], "PCMCI - MCC by number of variables \n VAR systems", folder + "PCMCI_Matrices_VAR", errors=matricesError[0,2,:,:], rowLabels = ["Low Density", "Medium Density", "High Density"], show=showDiagrams, save = doSave, xlabel ="Number of variables", ylabel="MCC")
+        vis.saveMCCCurve(matricesResults[0,0,:,:], [3,6,12], "GCSS - MCC by number of variables \n VAR systems", folder + "GCSS_Matrices_VAR", errors=matricesError[0,0,:,:], rowLabels = ["Low Density", "Medium Density", "High Density"], show=showDiagrams, save = doSave, xlabel ="Number of variables", ylabel="MCC")
+        vis.saveMCCCurve(matricesResults[0,1,:,:], [3,6,12], "LKIF - MCC by number of variables \n VAR systems", folder + "LKIF_Matrices_VAR", errors=matricesError[0,1,:,:], rowLabels = ["Low Density", "Medium Density", "High Density"], show=showDiagrams, save = doSave, xlabel ="Number of variables", ylabel="MCC")
+        vis.saveMCCCurve(matricesResults[0,2,:,:], [3,6,12], "PCMCI - MCC by number of variables \n VAR systems", folder + "PCMCI_Matrices_VAR", errors=matricesError[0,2,:,:], rowLabels = ["Low Density", "Medium Density", "High Density"], show=showDiagrams, save = doSave, xlabel ="Number of variables", ylabel="MCC")
         
-        vis.saveF1Curve(matricesResults[1,0,:,:], [3,6,12], "GCSS - MCC by number of variables \n x³ systems", folder + "GCSS_Matrices_Cascade", errors=matricesError[1,0,:,:], rowLabels = ["Low Density", "Medium Density", "High Density"], show=showDiagrams, save = doSave, xlabel ="Number of variables", ylabel="MCC")
-        vis.saveF1Curve(matricesResults[1,1,:,:], [3,6,12], "LKIF - MCC by number of variables \n x³ systems", folder + "LKIF_Matrices_Cascade", errors=matricesError[1,1,:,:], rowLabels = ["Low Density", "Medium Density", "High Density"], show=showDiagrams, save = doSave, xlabel ="Number of variables", ylabel="MCC")
-        vis.saveF1Curve(matricesResults[1,2,:,:], [3,6,12], "PCMCI - MCC by number of variables \n x³ systems", folder + "PCMCI_Matrices_Cascade", errors=matricesError[1,2,:,:], rowLabels = ["Low Density", "Medium Density", "High Density"], show=showDiagrams, save = doSave, xlabel ="Number of variables", ylabel="MCC")
+        vis.saveMCCCurve(matricesResults[1,0,:,:], [3,6,12], "GCSS - MCC by number of variables \n x³ systems", folder + "GCSS_Matrices_Cascade", errors=matricesError[1,0,:,:], rowLabels = ["Low Density", "Medium Density", "High Density"], show=showDiagrams, save = doSave, xlabel ="Number of variables", ylabel="MCC")
+        vis.saveMCCCurve(matricesResults[1,1,:,:], [3,6,12], "LKIF - MCC by number of variables \n x³ systems", folder + "LKIF_Matrices_Cascade", errors=matricesError[1,1,:,:], rowLabels = ["Low Density", "Medium Density", "High Density"], show=showDiagrams, save = doSave, xlabel ="Number of variables", ylabel="MCC")
+        vis.saveMCCCurve(matricesResults[1,2,:,:], [3,6,12], "PCMCI - MCC by number of variables \n x³ systems", folder + "PCMCI_Matrices_Cascade", errors=matricesError[1,2,:,:], rowLabels = ["Low Density", "Medium Density", "High Density"], show=showDiagrams, save = doSave, xlabel ="Number of variables", ylabel="MCC")
 
     if plotDecisionTree:
         if calculateFullSearchSpace:
@@ -805,21 +777,9 @@ def mainEvaluations(analysisIndex = None):
                 labelsMaxCascade = labelsMaxCascade-1
                 del class_names_max_Cascade[i]
 
-        vis.saveDecisionTree(dataVAR, labelsVAR, feature_names, class_names_VAR, folder + "VAR_DecTree.svg", show=showDiagrams, save= doSave)
-        
-        #vis.saveDecisionBoundaries(data = dataVAR[:,:2], labels=labelsVAR, filename = folder+ "VAR_MatrixDecBound", show= showDiagrams, save = doSave)
-
-        vis.saveDecisionTree(dataCascade, labelsCascade, feature_names, class_names_Cascade, folder + "Cascade_DecTree.svg", show=showDiagrams, save= doSave)
-        
-        #vis.saveDecisionBoundaries(data = dataCascade[:,:2], labels=labelsCascade, filename = folder+ "Cascade_MatrixDecBound", show= showDiagrams, save = doSave)
-
         vis.saveDecisionTree(dataVAR, labelsMaxVAR, feature_names, class_names_max_VAR, folder + "VAR_DecTree_FirstRank.svg", show=showDiagrams, save= doSave)
-        
-        #vis.saveDecisionBoundaries(data = dataVAR[:,:2], labels=labelsMaxVAR, filename = folder+ "VAR_MatrixDecBound_FirstRank", show= showDiagrams, save = doSave)
 
         vis.saveDecisionTree(dataCascade, labelsMaxCascade, feature_names, class_names_max_Cascade, folder + "Cascade_DecTree_FirstRank.svg", show=showDiagrams, save= doSave)
-        
-        #vis.saveDecisionBoundaries(data = dataCascade[:,:2], labels=labelsMaxCascade, filename = folder+ "Cascade_MatrixDecBound_FirstRank", show= showDiagrams, save = doSave)
 
     if plotAlphaCombined:
         if calculateAlphaCombined:

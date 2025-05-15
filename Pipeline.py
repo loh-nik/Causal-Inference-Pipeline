@@ -339,7 +339,7 @@ if __name__ == "__main__":
     elif data.shape[1] > 10:
         print("Highest confidence in LKIF, potential performance problems with PCMCI")
     else: 
-        print("Highest confidence in LKIF and PCMCI")
+        print("LKIF and PCMCI recommended")
         
 
     inputStr = ""

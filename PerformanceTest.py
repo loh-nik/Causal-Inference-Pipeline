@@ -89,7 +89,7 @@ def compareExecutionTimes():
     # from last execution:
     # PCMCI executed less samples for 10 var system: 44
     resultNumVars = np.array([[1.42187500e+07, 6.25000000e+05, 8.15625000e+07], [1.40625000e+07, 6.25000000e+05, 1.72343750e+08],[1.29687500e+07, 7.81250000e+05, 4.93593750e+08],[1.17187500e+07, 7.81250000e+05, 9.39062500e+08],[1.35937500e+07, 9.37500000e+05, 2.27272727e+09]])
-    vis.saveF1Curve((resultNumVars / len(seeds)).T, numVars, "Algorithm Execution Time", "./PerformanceExperiment/perf_numberVars", rowLabels = ["GCSS", "LKIF", "PCMCI"], 
+    vis.saveMCCCurve((resultNumVars).T, numVars, "Algorithm Execution Time", "./PerformanceExperiment/perf_numberVars", rowLabels = ["GCSS", "LKIF", "PCMCI"], 
                         xlabel = "System Variables", ylabel = "Execution time in ns", yscale = "log")
     if False:
         resultsSamples = np.zeros((len(samples), 3))
@@ -100,7 +100,7 @@ def compareExecutionTimes():
             resultsSamples[sampInd] = getExecutionTimes(matrix, ["GCSS", "LKIF", "PCMCI"], "Cascade", sampleCount, 0.05, 1, 0.1, 5, seeds, 0.1)
         print(resultsSamples)
     resultsSamples = np.array([[1.8906250e+07, 6.2500000e+05, 1.8187500e+08],[1.5625000e+07, 7.8125000e+05, 2.1890625e+08],[1.5468750e+07, 7.8125000e+05, 2.2625000e+08], [2.0000000e+07, 3.4375000e+06, 9.3140625e+08]])
-    vis.saveF1Curve((resultsSamples / len(samples)).T, samples, "Algorithm Execution Time", "./PerformanceExperiment/perf_samples", rowLabels = ["GCSS", "LKIF", "PCMCI"], 
+    vis.saveMCCCurve((resultsSamples).T, samples, "Algorithm Execution Time", "./PerformanceExperiment/perf_samples", rowLabels = ["GCSS", "LKIF", "PCMCI"], 
                         xlabel = "Sample Count", ylabel = "Execution time in ns", yscale = "log", xscale="log")
 
 if __name__ == "__main__":
