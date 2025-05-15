@@ -11,6 +11,8 @@ It's recommended to start by installing GNU Octave, which is used to run the GCS
 
 After that, install the requirements.txt (recommended into a virtual environment), and install the tigramite package manually, following https://github.com/jakobrunge/tigramite/.
 
+Should the LFS file for spatially resolved sea ice not be downloadable due to Github's limitations, refer to https://drive.google.com/file/d/1GYc6_fQL6Xr080TPPgz65-85_O83wWLm/view?usp=sharing for download.
+
 # Usage
 
 The Pipeline.py file contains the main pipeline, which can be run from the command line with several arguments, run Pipeline.py -h for a list and description of arguments. Test files in CSV and NPY format are included.
